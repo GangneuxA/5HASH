@@ -20,7 +20,7 @@ module "prestashop" {
   mysql_password        = var.mysql_password
   mysql_database        = var.mysql_database
   mysql_host_name       = module.mysql.mysql_container_name
-  replica_count         = 1
+  replica_count         = var.replica_count
   admin_mail            = var.admin_mail
   admin_passwd          = var.admin_passwd
 }
@@ -30,7 +30,7 @@ module "ngnix" {
 
   network_name          = module.mysql.docker_network_name
   container_name_prefix = var.prefix
-  replica_count         = 1
+  replica_count         = var.replica_count
   load_balancer_port    = 8080
 
 }

@@ -1,52 +1,10 @@
-# Génération du fichier NGINX
-resource "local_file" "nginx_config" {
-  filename = "${path.module}/generated_nginx.conf"
-  content  = templatefile(replace("${path.module}/nginx.conf.tpl", "/", "\\"), {
-    container_name_prefix = var.container_name_prefix,
-    replica_count         = var.replica_count
-  })
-}
-
-resource "docker_network" "prestashop_network" {
-  name = var.network_name
-}
-
-resource "docker_image" "mysql_image" {
-  name = "mysql:5.7"
-  keep_locally = false
+resource "docker_volume" "prestashop_data" {
+  name = "${var.container_name_prefix}-prestashop_data"
 }
 
 resource "docker_image" "prestashop_image" {
   name = "prestashop/prestashop:${var.prestashop_version}"
-  keep_locally = false
-}
-
-resource "docker_image" "nginx_image" {
-  name = "nginx:latest"
-  keep_locally = false
-}
-
-resource "docker_container" "mysql_container" {
-  image = docker_image.mysql_image.image_id
-  name  = "${var.container_name_prefix}-mysql"
-  
-  env = [
-    "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}",
-    "MYSQL_DATABASE=${var.mysql_database}",
-    "MYSQL_USER=${var.mysql_user}",
-    "MYSQL_PASSWORD=${var.mysql_password}"
-  ]
-
-  networks_advanced {
-    name = docker_network.prestashop_network.name
-  }
-
-  ports {
-    internal = 3306
-    external = 3306
-  }
-
-  restart = "always"
+  keep_locally = true
 }
 
 resource "docker_container" "prestashop_container" {
@@ -54,40 +12,40 @@ resource "docker_container" "prestashop_container" {
 
   image = docker_image.prestashop_image.image_id
   name  = "${var.container_name_prefix}-prestashop-${count.index}"
-
+  ports {
+   internal = 80
+   external = "809${count.index}"
+  }
   env = [
-    "DB_SERVER=${docker_container.mysql_container.name}",
+    "DISABLE_MAKE=${var.disable_make}",
+    "PS_INSTALL_AUTO=${var.ps_install_auto}",
+    "DB_SERVER=${var.mysql_host_name}",
     "DB_NAME=${var.mysql_database}",
     "DB_USER=${var.mysql_user}",
-    "DB_PASSWD=${var.mysql_password}"
+    "DB_PASSWD=${var.mysql_password}",
+    "DB_PREFIX=${var.db_prefix}",
+    "PS_DOMAIN=127.0.0.1:809${count.index}",
+    "PS_FOLDER_INSTALL=${var.ps_folder_install}",
+    "PS_FOLDER_ADMIN=${var.ps_folder_admin}",
+    "PS_COUNTRY=${var.ps_country}",
+    "PS_LANGUAGE=${var.ps_language}",
+    "PS_DEV_MODE=${var.ps_dev_mode}",
+    "PS_ENABLE_SSL=${var.ps_enable_ssl}",
+    "PS_ERASE_DB=${var.ps_erase_db}",
+    "PS_USE_DOCKER_MAILDEV=${var.ps_use_docker_maildev}",
+    "ADMIN_MAIL=${var.admin_mail}",
+    "ADMIN_PASSWD=${var.admin_passwd}",
+    "BLACKFIRE_ENABLE=${var.blackfire_enable}",
+    "BLACKFIRE_SERVER_ID=${var.blackfire_server_id}",
+    "BLACKFIRE_SERVER_TOKEN=${var.blackfire_server_token}",
   ]
-
   networks_advanced {
-    name = docker_network.prestashop_network.name
+    name = var.network_name
   }
-
-  restart = "always"
-}
-
-# Conteneur NGINX comme load balancer
-resource "docker_container" "nginx_lb_container" {
-  image = docker_image.nginx_image.image_id
-  name  = "${var.container_name_prefix}-nginx-lb"
-
-  networks_advanced {
-    name = docker_network.prestashop_network.name
-  }
-
-  ports {
-    internal = 80
-    external = var.load_balancer_port
-  }
-
-  restart = "always"
-
-  # Utilisation du fichier généré pour NGINX
   volumes {
-    host_path      = replace(abspath("${path.module}/generated_nginx.conf"), "/", "\\")
-    container_path = "/etc/nginx/nginx.conf"
+    container_path = "/var/www/html"
+    volume_name = docker_volume.prestashop_data.name
   }
+
+  restart = "unless-stopped"
 }

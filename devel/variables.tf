@@ -7,7 +7,7 @@ variable "prefix" {
 variable "network" {
   description = "Docker network"
   type        = string
-  default     = "my_prestashop_network"
+  default     = "my_prestashop_network-dev"
 }
 
 variable "mysql_root_password" {
@@ -47,5 +47,11 @@ variable "admin_passwd" {
   type        = string
   default     = "admin_passwd"
   sensitive = true
+}
+
+variable "replica_count" {
+  description = "Nombres de réplica voulue"
+  type = number
+  default = 1
 }
 
