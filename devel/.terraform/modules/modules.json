@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"prestashop","Source":"../modules/prestashop","Dir":"../modules/prestashop"}]}
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"mysql","Source":"../modules/mysql","Dir":"../modules/mysql"},{"Key":"ngnix","Source":"../modules/ngnix","Dir":"../modules/ngnix"},{"Key":"prestashop","Source":"../modules/prestashop","Dir":"../modules/prestashop"}]}
