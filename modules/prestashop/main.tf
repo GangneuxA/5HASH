@@ -1,12 +1,15 @@
+# création du volume commun
 resource "docker_volume" "prestashop_data" {
   name = "${var.container_name_prefix}-prestashop_data"
 }
 
+# préparation de l'imag
 resource "docker_image" "prestashop_image" {
   name = "prestashop/prestashop:${var.prestashop_version}"
   keep_locally = true
 }
 
+# création ddes container prestashop
 resource "docker_container" "prestashop_container" {
   count = var.replica_count
 

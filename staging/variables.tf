@@ -13,7 +13,6 @@ variable "network" {
 variable "mysql_root_password" {
   description = "Sensitive Root password pour bdd mysql"
   type        = string
-  default     = "root_password"
   sensitive = true
 }
 
@@ -26,7 +25,6 @@ variable "mysql_user" {
 variable "mysql_password" {
   description = "Sensitive user password pour bdd mysql"
   type        = string
-  default     = "prestashop_password"
   sensitive = true
 }
 
@@ -45,7 +43,6 @@ variable "admin_mail" {
 variable "admin_passwd" {
   description = "password administrateur"
   type        = string
-  default     = "admin_passwd"
   sensitive = true
 }
 

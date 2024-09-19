@@ -1,3 +1,4 @@
+# Volume pour la bdd master
 resource "docker_volume" "mysql_master_data" {
   name = "${var.container_name_prefix}-mysql_master_data"
 }
@@ -8,15 +9,18 @@ resource "docker_volume" "mysql_replica_data" {
   name  = "${var.container_name_prefix}-mysql_replica_data_${count.index}"
 }
 
+# network de tout les pods
 resource "docker_network" "prestashop_network" {
   name = var.network_name
 }
 
+# choix de l'image 
 resource "docker_image" "mysql_image" {
   name = "mysql:5.7"
   keep_locally = true
 }
 
+# création de la bases de donées master
 resource "docker_container" "mysql_master" {
   image = docker_image.mysql_image.image_id
   name  = "${var.container_name_prefix}-mysql-master"
@@ -48,8 +52,9 @@ resource "docker_container" "mysql_master" {
   restart = "always"
 }
 
+# création des bases de donées réplicat
 resource "docker_container" "mysql_replica" {
-  count = var.mysql_replica_count  # Réplication basée sur le nombre de réplicas
+  count = var.mysql_replica_count
 
   image = docker_image.mysql_image.image_id
   name  = "${var.container_name_prefix}-mysql-replica-${count.index}"

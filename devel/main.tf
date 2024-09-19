@@ -1,3 +1,5 @@
+
+# création des bases de données
 module "mysql" {
   source = "../modules/mysql"
   network_name          = var.network
@@ -9,6 +11,7 @@ module "mysql" {
   mysql_replica_count   = 1
 }
 
+# création de prestashop
 module "prestashop" {
   source = "../modules/prestashop"
 
@@ -25,6 +28,7 @@ module "prestashop" {
   admin_passwd          = var.admin_passwd
 }
 
+# mise en place du nginx
 module "ngnix" {
   source = "../modules/ngnix"
 
