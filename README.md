@@ -42,9 +42,29 @@ Dans le dossier `modules/` on retrouve trois composants réutilisables pour déf
 
 ## Démarrage
 
+### Prérequis
 
-windows 
+*   Terraform doit être installé sur la machine.
+*   Docker doit être installé sur la machine.
 
+### Environnement
+
+Choissisez votre environnement de déploiement :
+
+```Bash
+cd "environnement"
+```
+
+### Mots de Passes
+
+Avant de pouvoir déployer l'infrastructure il faut mettre en place les variables d'environnements suivantes : 
+
+```Bash
 export TF_VAR_admin_passwd=somesecret
 export TF_VAR_mysql_password=somesecret
-export TF_VAR_mysql_root_password=somesecret
+export TF_VAR_mysql_root_password=
+```
+
+### Déploiement
+
+Windows
