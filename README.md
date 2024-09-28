@@ -16,6 +16,33 @@ Chaque environnement sont constitués de la même façon :
 
 ### Modules 
 
+Dans le dossier `modules/` on retrouve trois composants réutilisables pour définir l'infrastructure :
+
+**mysql**
+
+*   `main.tf` : Contient la configuration des ressources MySQL.
+*   `outputs.tf` : Contient les sorties exposées pour le module.
+*   `provider.tf` : Contient le provider utilisé.
+*   `variables.tf` : Contient les variables nécessaires au module. 
+
+**nginx**
+
+*   `main.tf` : Contient la configuration des ressources NGNIX.
+*   `outputs.tf` : Contient les sorties exposées pour le module.
+*   `provider.tf` : Contient le provider utilisé.
+*   `variables.tf` : Contient les variables nécessaires au module. 
+*   `nginx.conf.tpl` : Contient un modèle de configuration pour NGNIX. 
+
+**prestashop**
+
+*   `main.tf` : Contient la configuration des ressources PrestaShop.
+*   `outputs.tf` : Contient les sorties exposées pour le module.
+*   `provider.tf` : Contient le provider utilisé.
+*   `variables.tf` : Contient les variables nécessaires au module. 
+
+## Démarrage
+
+
 windows 
 
 export TF_VAR_admin_passwd=somesecret
