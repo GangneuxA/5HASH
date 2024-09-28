@@ -62,9 +62,30 @@ Avant de pouvoir déployer l'infrastructure il faut mettre en place les variable
 ```Bash
 export TF_VAR_admin_passwd=somesecret
 export TF_VAR_mysql_password=somesecret
-export TF_VAR_mysql_root_password=
+export TF_VAR_mysql_root_password=somesecret
 ```
 
 ### Déploiement
+
+Une fois dans le dossier d'environnement voulue et les variables export on peut commencer le déploiement de l'infrastrucutre par Terraform.
+
+#### Commandes Terraform 
+
+1. **Initialisez le projet pour télécharger les plugins**
+```Bash
+terraform init
+```
+2. **Visualiser le plan d'exécution**
+```Bash
+terraform plan
+```
+3. **Déploiement de l'infrastructure**
+```Bash
+terraform deploy
+```
+4. **Détruire l'infrastructure**
+```Bash
+terraform destroy
+```
 
 Windows
