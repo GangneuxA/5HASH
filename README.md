@@ -11,8 +11,8 @@ Trois environnements sont disponible pour déployer l'infrastructure.
 *   prod : Environnement de production.
 
 Chaque environnement sont constitués de la même façon :
-*   Un fichier main.tf : Le fichier principal qui permet la définition des ressources à déployer.
-*   Un fichier variables.tf : Permet de définir des variables d'entrée spécifiques à l'environnement. 
+*   Un fichier `main.tf` : Le fichier principal qui permet la définition des ressources à déployer.
+*   Un fichier `variables.tf` : Permet de définir des variables d'entrée spécifiques à l'environnement. 
 
 ### Modules 
 
