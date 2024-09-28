@@ -1,5 +1,7 @@
 # 5HASH
 
+⚠️ **Attention** : Ce projet Terraform ne fonctionne que sur des machines Windows.
+
 ## Structure du projet 
 
 ### Environnements 
@@ -88,4 +90,27 @@ terraform deploy
 terraform destroy
 ```
 
-Windows
+#### Scalabilités et Variables
+
+Il est possible d'augmenter et de réduire le nombre de ressource pour chaques modules depuis le dossier d'environnement : 
+
+*   Par le fichier `main.tf` pour modifier le nombre de réplicat MySQL : modification de la ligne `mysql_replica_count`
+
+*   Par le fichier `variables.tf` pour modifier le nombre de réplicat des NGNIX et PrestaShop : modification de la variable `replica_count`
+
+*   Vous pouvez modifier toutes autres variables dans le `main.tf` ou le `variables.tf` pour modifier les valeurs de l'infrastructure. 
+
+On fois les valeurs modifiées il vous suffira de faire un : 
+```Bash
+terraform plan
+```
+Pour visualiser les modifications et enfin :
+```Bash
+terraform deploy
+```
+Pour déployé la nouvelle infrastructure
+
+## Auteurs 
+
+*   **GANGNEUX Alexis**
+*   **BOISGARD Julien**
