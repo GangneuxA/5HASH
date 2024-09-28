@@ -6,13 +6,13 @@
 
 ### Environnements 
 
-Trois environnements sont disponible pour déployer l'infrastructure.
+Trois environnements sont disponibles pour déployer l'infrastructure.
 
 *   **devel** : Environnement de développement.
 *   **staging** : Environnement de pré-production.
 *   **prod** : Environnement de production.
 
-Chaque environnement sont constitués de la même façon :
+Chaque environnement est constitué de la même façon :
 *   Un fichier `main.tf` : Le fichier principal qui permet la définition des ressources à déployer.
 *   Un fichier `variables.tf` : Permet de définir des variables d'entrée spécifiques à l'environnement. 
 
@@ -59,7 +59,7 @@ cd "environnement"
 
 ### Mots de Passes
 
-Avant de pouvoir déployer l'infrastructure il faut mettre en place les variables d'environnements suivantes : 
+Avant de pouvoir déployer l'infrastructure, il faut mettre en place les variables d'environnements suivantes : 
 
 ```Bash
 export TF_VAR_admin_passwd=somesecret
@@ -69,7 +69,7 @@ export TF_VAR_mysql_root_password=somesecret
 
 ### Déploiement
 
-Une fois dans le dossier d'environnement voulue et les variables export on peut commencer le déploiement de l'infrastrucutre par Terraform.
+Une fois dans le dossier d'environnement voulue et les variables export, on peut commencer le déploiement de l'infrastructure par Terraform.
 
 #### Commandes Terraform 
 
@@ -100,7 +100,7 @@ Il est possible d'augmenter et de réduire le nombre de ressource pour chaques m
 
 *   Vous pouvez modifier toutes autres variables dans le `main.tf` ou le `variables.tf` pour modifier les valeurs de l'infrastructure. 
 
-On fois les valeurs modifiées il vous suffira de faire un : 
+Une fois les valeurs modifiées, il vous suffira de faire un : 
 ```Bash
 terraform plan
 ```
