@@ -6,9 +6,9 @@
 
 Trois environnements sont disponible pour déployer l'infrastructure.
 
-*   devel : Environnement de développement.
-*   staging : Environnement de pré-production.
-*   prod : Environnement de production.
+*   **devel** : Environnement de développement.
+*   **staging** : Environnement de pré-production.
+*   **prod** : Environnement de production.
 
 Chaque environnement sont constitués de la même façon :
 *   Un fichier `main.tf` : Le fichier principal qui permet la définition des ressources à déployer.
