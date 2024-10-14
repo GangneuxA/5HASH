@@ -83,7 +83,7 @@ terraform plan
 ```
 3. **Déploiement de l'infrastructure**
 ```Bash
-terraform deploy
+terraform apply
 ```
 4. **Détruire l'infrastructure**
 ```Bash
@@ -106,7 +106,7 @@ terraform plan
 ```
 Pour visualiser les modifications et enfin :
 ```Bash
-terraform deploy
+terraform apply
 ```
 Pour déployé la nouvelle infrastructure
 
